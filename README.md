@@ -1,10 +1,9 @@
 # Table of Contents
 * [Universal deployer](#universal-deployer)
 * [Dependencies](#dependencies)
-	* [Dependencies by plugins](#dependencies-by-plugin)
-	  * [Curator](#curator)
+	* [Dependencies by plugins](#dependencies-by-plugins)
 * [Usage](#usage)
-	* [Default values](#Default-values)
+	* [Default values](#default-values)
 	* [App types](#app-types)
 		* [iis_website](#iis_website) 
 		* [sc_service](#sc_service) 
@@ -15,7 +14,7 @@
 		* [Chocolatey](#chocolatey)
 * [Writting a new plugin](#writting-a-new-plugin)
 
-# Universal_deployer
+# Universal deployer
 
 Universal_deployer is developed to simplify and homogenize the deployment of heterogeneous application types.
 
@@ -38,10 +37,13 @@ pip install -r requirements.txt -t .
 And you need install some extra dependencies if you use some plugins
 
 ## Dependencies by plugins
-### Curator
-```bash
-pip install elasticsearch-curator -t .
-```
+* chocolatey: go to [chocolatey.org](https://chocolatey.org) and download latest version
+
+* iis_website: you need enable IIS from windows features
+* nssm_service: ```choco install nssm```
+* curator: ```pip install elasticsearch-curator -t . ```
+* database: ```choco install liquibase``` You also need add jdbc plugin to liquibase installation
+
 
 # Usage
 
@@ -71,7 +73,7 @@ apps:
   * weight        --> 0 (zero) on all apps
   * log           --> level INFO and writed on console
 
-## app types
+## App types
 
 ### iis_website
 
@@ -173,4 +175,4 @@ To write a new plugin you just need to create a class with the same name that ap
 
 Now you should overwrite methods you need to implement the requeriment functionallity in order to homogeinize the deployment steps.
 
-You can see some examples on /plugins path.
+You can see some examples on [/plugins](/plugins) path.
