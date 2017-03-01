@@ -1,10 +1,4 @@
-import logging
-
 from .process import execute
-
-__name__ = 'universal_deployer'
-logger = logging.getLogger(__name__)
-
 
 def create(service_name, exec_path):
     cmd = 'sc.exe create {service_name} start=auto binpath={exec_path}'.format(

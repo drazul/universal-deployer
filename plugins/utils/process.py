@@ -1,9 +1,7 @@
-import logging
 import subprocess
 import sys
 
-__name__ = 'universal_deployer'
-logger = logging.getLogger(__name__)
+from logger import logger
 
 
 def execute(command, ignore_errors=True):

@@ -1,11 +1,9 @@
-import logging
 import sys
 import time
 
 from .process import execute
 
-__name__ = 'universal_deployer'
-logger = logging.getLogger(__name__)
+from logger import logger
 
 
 def create(service_name, executable_path, arguments=None):
@@ -24,12 +22,16 @@ def remove(service_name):
 def start(service_name):
     return_code = 1
     tries = 0
-    while return_code is not 0 and tries < 42:
-        time.sleep(tries)
-        tries *= (tries + 1)
+    while return_code is not 0 and tries < 6:
+        time_to_sleep = tries * tries
+        logger.info('Starting {service_name} in {time} seconds'.format(
+            service_name=service_name, time=time_to_sleep
+        ))
+        time.sleep(time_to_sleep)
 
         cmd = 'nssm start {service_name}'.format(service_name=service_name)
         return_code = execute(cmd, ignore_errors=True)
+        tries += 1
 
     if return_code is not 0:
         logger.error(

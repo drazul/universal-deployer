@@ -1,12 +1,6 @@
-import logging
-
 from .application_deployer import application_deployer
 from .utils import chocolatey
 from .utils import sc
-
-__name__ = 'universal_deployer'
-logger = logging.getLogger(__name__)
-logger.addHandler(logging.NullHandler())
 
 
 class sc_service(application_deployer):

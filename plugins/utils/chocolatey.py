@@ -1,9 +1,6 @@
-import logging
-
 from .process import execute
 
-__name__ = 'universal_deployer'
-logger = logging.getLogger(__name__)
+from logger import logger
 
 download_path = 'C:/ProgramData/chocolatey/lib'
 

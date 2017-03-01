@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import argparse
-import logging
 import os
 import platform
 import sys
@@ -9,6 +8,9 @@ import time
 import zipfile
 
 import yaml
+
+from logger import logger
+from logger import config_logger
 
 from plugins.nssm_service import nssm_service
 from plugins.sc_service import sc_service
@@ -120,37 +122,6 @@ class Deployer:
             self._str2method(app, command)()
 
 
-def config_logger(log_file, debug, quiet):
-    __name__ = 'universal_deployer'
-    logger = logging.getLogger(__name__)
-
-    if quiet:
-        return logger
-
-    if debug:
-        level = logging.DEBUG
-    else:
-        level = logging.INFO
-
-    logger.setLevel(level)
-
-    if log_file is not None:
-        file_formatter = logging.Formatter(
-            '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        fh = logging.FileHandler(log_file)
-        fh.setLevel(level)
-        fh.setFormatter(file_formatter)
-        logger.addHandler(fh)
-
-    console_formatter = logging.Formatter('%(levelname)s - %(message)s')
-    ch = logging.StreamHandler()
-    ch.setLevel(level)
-    ch.setFormatter(console_formatter)
-    logger.addHandler(ch)
-
-    return logger
-
-
 if __name__ == "__main__":
 
     _is_windows = platform.system() is 'Windows'
@@ -231,7 +202,7 @@ if __name__ == "__main__":
         print('You need specify a valid config file.')
         sys.exit(-1)
 
-    logger = config_logger(args.log_file, args.debug, args.quiet)
+    config_logger(args.log_file, args.debug, args.quiet)
 
     logger.info('Starting deploy')
 

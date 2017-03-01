@@ -1,9 +1,4 @@
-import logging
-
 from .process import execute
-
-__name__ = 'universal_deployer'
-logger = logging.getLogger(__name__)
 
 
 def create_database(db_server, db_name, changelog_file, properties_file):
@@ -16,22 +11,17 @@ def create_database(db_server, db_name, changelog_file, properties_file):
 
 
 def update_database(db_server, db_name, changelog_file,
-                    properties_file, params=None):
+                    properties_file, params=None, contexts=None):
 
     cmd = 'liquibase --changeLogFile={changelog_file} \
     --url="jdbc:sqlserver://{db_server};database={db_name}" \
-    --defaultsFile={properties_file} update {params}'.format(
+    --defaultsFile={properties_file} update'.format(
         db_server=db_server, db_name=db_name, changelog_file=changelog_file,
         properties_file=properties_file, params=params)
+
+    if params:
+        cmd += ' {params}'.format(params=params)
+    if contexts:
+        cmd += ' --contexts={contexts}'.format(contexts=contexts)
     execute(cmd)
 
-
-def update_database_context(db_server, db_name, changelog_file,
-                            properties_file, contexts):
-
-    cmd = 'liquibase --changeLogFile={changelog_file} \
-    --url="jdbc:sqlserver://{db_server};database={db_name}" \
-    --defaultsFile={properties_file} update --contexts={contexts}'.format(
-        db_server=db_server, db_name=db_name, changelog_file=changelog_file,
-        properties_file=properties_file, contexts=contexts)
-    execute(cmd)

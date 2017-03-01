@@ -1,13 +1,6 @@
-import logging
-
 from .application_deployer import application_deployer
 from .utils import chocolatey
 from .utils import nssm
-
-__name__ = 'universal_deployer'
-logger = logging.getLogger(__name__)
-logger.addHandler(logging.NullHandler())
-
 
 class nssm_service(application_deployer):
 

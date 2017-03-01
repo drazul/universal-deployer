@@ -1,10 +1,7 @@
-import logging
+from logger import logger
 
 import os
 import shutil
-
-__name__ = 'universal_deployer'
-logger = logging.getLogger(__name__)
 
 
 def sync(src, dst):
@@ -87,8 +84,9 @@ def _delete_file_list(parent_path, file_list):
 
 def _delete_empty_folders(root_path):
     subfolder_list = [
-        os.path.join(dirpath, dirnames)
-        for dirpath, dirnames, filenames in os.walk(root_path)]
+        dirpath
+        for dirpath, dirnames, filenames in os.walk(root_path)
+        if len(dirnames) is 0]
 
     for folder in subfolder_list:
         try:

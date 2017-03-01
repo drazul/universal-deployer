@@ -1,12 +1,6 @@
-import logging
-
 from .application_deployer import application_deployer
 from .utils import chocolatey
 from .utils import iis_site
-
-__name__ = 'universal_deployer'
-logger = logging.getLogger(__name__)
-logger.addHandler(logging.NullHandler())
 
 
 class iis_website(application_deployer):

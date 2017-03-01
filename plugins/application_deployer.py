@@ -1,14 +1,12 @@
 import fnmatch
 import glob
-import logging
 import os
 
 import jinja2
 
 from .utils import sync_folders
 
-__name__ = 'universal_deployer'
-logger = logging.getLogger(__name__)
+from logger import logger
 
 
 class application_deployer(object):

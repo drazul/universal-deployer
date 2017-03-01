@@ -1,9 +1,4 @@
-import logging
-
 from .process import execute
-
-__name__ = 'universal_deployer'
-logger = logging.getLogger(__name__)
 
 
 def activate(name, key):
