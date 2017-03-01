@@ -11,16 +11,16 @@ def create_database(db_server, db_name, changelog_file, properties_file):
 
 
 def update_database(db_server, db_name, changelog_file,
-                    properties_file, params=None, contexts=None):
+                    properties_file, arguments=None, contexts=None):
 
     cmd = 'liquibase --changeLogFile={changelog_file} \
     --url="jdbc:sqlserver://{db_server};database={db_name}" \
     --defaultsFile={properties_file} update'.format(
         db_server=db_server, db_name=db_name, changelog_file=changelog_file,
-        properties_file=properties_file, params=params)
+        properties_file=properties_file, arguments=arguments)
 
     if params:
-        cmd += ' {params}'.format(params=params)
+        cmd += ' {arguments}'.format(arguments=arguments)
     if contexts:
         cmd += ' --contexts={contexts}'.format(contexts=contexts)
     execute(cmd)

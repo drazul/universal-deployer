@@ -16,7 +16,7 @@ from plugins.nssm_service import nssm_service
 from plugins.sc_service import sc_service
 from plugins.iis_website import iis_website
 from plugins.curator import curator
-
+from plugins.databases import databases
 
 class Deployer:
     def __init__(self, config_file, config_path, install_path):
@@ -90,6 +90,8 @@ class Deployer:
             try:
                 class_type = self._str2class(app_type)
                 weight = 0
+                if 'weight' in self.global_config:
+                    weight = self.global_config['weight']
 
                 for app_name, app_config in all_apps.items():
                     if app_name == 'weight':
@@ -109,7 +111,7 @@ class Deployer:
                                 self.install_path,
                                 app_type, app_name)))
 
-            except Exception as error:
+            except ValueError as error:
                 logger.warning(error)
 
     def _order_objects_by_weight(self):

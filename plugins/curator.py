@@ -3,6 +3,7 @@ import os
 from .application_deployer import application_deployer
 from .utils import chocolatey
 from .utils import process
+from logger import logger
 
 
 class curator(application_deployer):

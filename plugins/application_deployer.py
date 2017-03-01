@@ -58,6 +58,8 @@ class application_deployer(object):
     @staticmethod
     def _find_files(root_path, pattern):
         file_list = []
+        if not os.path.isdir(root_path):
+            return file_list
 
         for file in os.listdir(root_path):
             if fnmatch.fnmatch(file, pattern):

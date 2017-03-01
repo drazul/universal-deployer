@@ -1,5 +1,6 @@
 from .process import execute
 
+
 def create(service_name, exec_path):
     cmd = 'sc.exe create {service_name} start=auto binpath={exec_path}'.format(
         service_name=service_name, exec_path=exec_path)

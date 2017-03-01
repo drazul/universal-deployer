@@ -2,8 +2,8 @@ from .application_deployer import application_deployer
 from .utils import chocolatey
 from .utils import nssm
 
-class nssm_service(application_deployer):
 
+class nssm_service(application_deployer):
     def get_installed_version(self):
         super(nssm_service, self).get_installed_version()
         chocolatey.get_installed_version(self.pkg_name)
