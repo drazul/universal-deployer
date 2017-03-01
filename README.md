@@ -148,6 +148,7 @@ apps:
       pkg_name: audit_database
       version: 1.2.0.18
       params:
+        create_database: False  # <-- in some cases (as Azure databases) scripts cannot create new databases
         host: database.VM1
         database_name: audit
         arguments: '-DNODEID=1' # <-- values to be deplaced by liquibase on changelog files
