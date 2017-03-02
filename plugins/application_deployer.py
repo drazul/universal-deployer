@@ -86,37 +86,57 @@ class application_deployer(object):
                 f_dst.write(content)
 
     def get_installed_version(self):
-        logger.info('Task get_installed_version {0}'.format(self.name))
+        if self.get_installed_version.__code__ is not \
+                application_deployer.get_installed_version.__code__:
+            logger.info('Task get_installed_version {0}'.format(self.name))
 
     def download(self):
-        logger.info('Task download {0} version {1}'.format(
-            self.pkg_name, self.version))
+        if self.download.__code__ is not \
+                application_deployer.download.__code__:
+            logger.info('Task download {0} version {1}'.format(
+                self.pkg_name, self.version))
 
     def configure(self):
-        logger.info('Task configure {0}'.format(self.name))
+        if self.configure.__code__ is not \
+                application_deployer.configure.__code__:
+            logger.info('Task configure {0}'.format(self.name))
 
     def deploy_pre(self):
-        logger.info('Task deploy_pre {0}'.format(self.name))
+        if self.deploy_pre.__code__ is not \
+                application_deployer.deploy_pre.__code__:
+            logger.info('Task deploy_pre {0}'.format(self.name))
 
     def deploy(self):
-        logger.info('Task deploy {0}'.format(self.name))
+        if self.deploy.__code__ is not \
+                application_deployer.deploy.__code__:
+            logger.info('Task deploy {0}'.format(self.name))
 
     def deploy_post(self):
-        logger.info('Task deploy_post {0}'.format(self.name))
+        if self.deploy_post.__code__ is not \
+                application_deployer.deploy_post.__code__:
+            logger.info('Task deploy_post {0}'.format(self.name))
 
     def start(self):
-        logger.info('Task start {0}'.format(self.name))
+        if self.start.__code__ is not \
+                application_deployer.start.__code__:
+            logger.info('Task start {0}'.format(self.name))
 
     def stop(self):
-        logger.info('Task stop {0}'.format(self.name))
+        if self.stop.__code__ is not \
+                application_deployer.stop.__code__:
+            logger.info('Task stop {0}'.format(self.name))
 
     def create(self):
-        logger.info('Task create {0}'.format(self.name))
+        if self.create.__code__ is not \
+                application_deployer.create.__code__:
+            logger.info('Task create {0}'.format(self.name))
 
     def remove(self):
-        logger.info('Task remove {0}'.format(self.name))
+        if self.remove.__code__ is not \
+                application_deployer.remove.__code__:
+            logger.info('Task remove {0}'.format(self.name))
 
     def restart(self):
-        logger.info('Task restart {0}'.format(self.name))
-        self.stop()
-        self.start()
+        if self.restart.__code__ is not \
+                application_deployer.restart.__code__:
+            logger.info('Task restart {0}'.format(self.name))

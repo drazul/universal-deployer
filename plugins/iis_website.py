@@ -59,3 +59,8 @@ class iis_website(application_deployer):
     def stop(self):
         super(iis_website, self).stop()
         iis_site.stop(self.name)
+
+    def restart(self):
+        super(iis_website, self).restart()
+        self.stop()
+        self.start()

@@ -58,3 +58,8 @@ class nssm_service(application_deployer):
     def stop(self):
         super(nssm_service, self).stop()
         nssm.stop(self.name)
+
+    def restart(self):
+        super(nssm_service, self).restart()
+        self.stop()
+        self.start()

@@ -59,3 +59,7 @@ class sc_service(application_deployer):
         super(sc_service, self).remove()
         sc.remove(self.name)
 
+    def restart(self):
+        super(sc_service, self).restart()
+        self.stop()
+        self.start()

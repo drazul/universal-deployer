@@ -120,6 +120,8 @@ class Deployer:
         self.apps = sorted(self.apps, key=lambda app: app.weight, reverse=True)
 
     def execute(self, command, app_filter):
+        logger.info('Executing task {command} {filter}'.format(
+            command=command, filter=app_filter))
         app_filter = self._filter(app_filter)
         if command == 'str':
             logger.info('weight app_name version')
@@ -240,3 +242,6 @@ if __name__ == "__main__":
         deployer.execute('download', args.download)
     if args.configure:
         deployer.execute('configure', args.configure)
+
+    logger.info('{project_name} finished successfully!'.format(
+        project_name='universal_deployer'))
