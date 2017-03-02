@@ -31,7 +31,7 @@ class curator(application_deployer):
         logger.debug('Using config file: {0}'.format(config_file))
         for f in self._find_files(self.install_path, '*.yaml'):
             logger.info('Executing file: {0}'.format(f))
-            process.execute(
-                'curator --config {config_file} {exec_file}'.format(
-                        config_file=config_file,
-                        exec_file=f))
+            cmd = 'curator --config {config_file} {exec_file}'.format(
+                config_file=config_file,
+                exec_file=f)
+            process.execute(cmd)

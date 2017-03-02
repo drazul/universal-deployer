@@ -1,9 +1,6 @@
-import os
-
 from .application_deployer import application_deployer
 from .utils import chocolatey
 from .utils import liquibase
-from logger import logger
 
 
 class databases(application_deployer):
@@ -11,8 +8,9 @@ class databases(application_deployer):
     def __init__(
             self, name, app_config, app_type,
             weight, global_config, config_path, install_path):
-        super(databases, self).__init__(name, app_config, app_type,
-                weight, global_config, config_path, install_path)
+        super(databases, self).__init__(
+            name, app_config, app_type, weight,
+            global_config, config_path, install_path)
 
         self.properties_file = ''
 

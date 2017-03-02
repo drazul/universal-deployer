@@ -17,6 +17,8 @@ from plugins.sc_service import sc_service
 from plugins.iis_website import iis_website
 from plugins.curator import curator
 from plugins.databases import databases
+from plugins.executable import executable
+
 
 class Deployer:
     def __init__(self, config_file, config_path, install_path):
@@ -119,7 +121,8 @@ class Deployer:
 
     def execute(self, command, app_filter):
         app_filter = self._filter(app_filter)
-
+        if command == 'str':
+            logger.info('weight app_name version')
         for app in app_filter:
             self._str2method(app, command)()
 
@@ -206,7 +209,8 @@ if __name__ == "__main__":
 
     config_logger(args.log_file, args.debug, args.quiet)
 
-    logger.info('Starting deploy')
+    logger.info('Starting {project_name}'.format(
+        project_name='universal_deployer'))
 
     deployer = Deployer(
         args.config_file,

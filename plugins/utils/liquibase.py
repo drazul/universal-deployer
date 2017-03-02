@@ -19,7 +19,7 @@ def update_database(db_server, db_name, changelog_file,
         db_server=db_server, db_name=db_name, changelog_file=changelog_file,
         properties_file=properties_file, arguments=arguments)
 
-    if params:
+    if arguments:
         cmd += ' {arguments}'.format(arguments=arguments)
     if contexts:
         cmd += ' --contexts={contexts}'.format(contexts=contexts)

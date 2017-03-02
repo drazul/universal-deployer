@@ -30,7 +30,7 @@ class application_deployer(object):
         self.install_path = install_path
 
     def __str__(self):
-        return '{weight} {app_name}  {version}'.format(
+        return '{weight} {app_name} {version}'.format(
             weight=self.weight,
             app_name=self.name, version=self.version)
 
