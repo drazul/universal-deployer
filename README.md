@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/drazul/universal-deployer.svg?branch=master)](https://travis-ci.org/drazul/universal-deployer)
+
 # Table of Contents
 * [Universal deployer](#universal-deployer)
 * [Dependencies](#dependencies)
