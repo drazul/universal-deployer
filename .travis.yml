@@ -1,0 +1,24 @@
+language: python
+sudo: false
+
+python:
+  - "3.4"
+  - "3.5"
+
+install:
+  - python setup.py install
+  - python setup.py develop
+  - pip install -U flake8 pytest pytest-cov coveralls pexpect
+  - pip freeze
+
+script:
+  - flake8
+  - py.test -vv tests
+
+after_success:
+  - coveralls
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
