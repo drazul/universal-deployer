@@ -45,8 +45,8 @@ class databases(application_deployer):
         super(databases, self).deploy_pre()
         properties_file = self._search_properties_file()
 
-        if 'create_database' in self.params and \
-                self.params['create_database']:
+        if ('create_database' in self.params and
+                self.params['create_database']):
             liquibase.create_database(
                 self.params['host'],
                 self.params['db_name'],

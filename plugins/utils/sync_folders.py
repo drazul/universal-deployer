@@ -62,8 +62,8 @@ def _are_same_file(file1, file2):
     stats1 = os.stat(file1)
     stats2 = os.stat(file2)
 
-    return stats1.st_size is stats2.st_size and  \
-        stats1.st_mtime is stats2.st_mtime
+    return (stats1.st_size is stats2.st_size and
+            stats1.st_mtime is stats2.st_mtime)
 
 
 def _copy_file_list(src, dst, file_list):

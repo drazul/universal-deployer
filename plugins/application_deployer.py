@@ -86,57 +86,68 @@ class application_deployer(object):
                 f_dst.write(content)
 
     def get_installed_version(self):
-        if self.get_installed_version.__code__ is not \
-                application_deployer.get_installed_version.__code__:
+        # noinspection PyUnresolvedReferences
+        if (self.get_installed_version.__code__ is not
+                application_deployer.get_installed_version.__code__):
             logger.info('Task get_installed_version {0}'.format(self.name))
 
     def download(self):
-        if self.download.__code__ is not \
-                application_deployer.download.__code__:
+        # noinspection PyUnresolvedReferences
+        if (self.download.__code__ is not
+                application_deployer.download.__code__):
             logger.info('Task download {0} version {1}'.format(
                 self.pkg_name, self.version))
 
     def configure(self):
-        if self.configure.__code__ is not \
-                application_deployer.configure.__code__:
+        # noinspection PyUnresolvedReferences
+        if (self.configure.__code__ is not
+                application_deployer.configure.__code__):
             logger.info('Task configure {0}'.format(self.name))
 
     def deploy_pre(self):
-        if self.deploy_pre.__code__ is not \
-                application_deployer.deploy_pre.__code__:
+        # noinspection PyUnresolvedReferences
+        if (self.deploy_pre.__code__ is not
+                application_deployer.deploy_pre.__code__):
             logger.info('Task deploy_pre {0}'.format(self.name))
 
     def deploy(self):
-        if self.deploy.__code__ is not \
-                application_deployer.deploy.__code__:
+        # noinspection PyUnresolvedReferences
+        if (self.deploy.__code__ is not
+                application_deployer.deploy.__code__):
             logger.info('Task deploy {0}'.format(self.name))
 
     def deploy_post(self):
-        if self.deploy_post.__code__ is not \
-                application_deployer.deploy_post.__code__:
+        # noinspection PyUnresolvedReferences
+        if (self.deploy_post.__code__ is not
+                application_deployer.deploy_post.__code__):
             logger.info('Task deploy_post {0}'.format(self.name))
 
     def start(self):
-        if self.start.__code__ is not \
-                application_deployer.start.__code__:
+        # noinspection PyUnresolvedReferences
+        if (self.start.__code__ is not
+                application_deployer.start.__code__):
             logger.info('Task start {0}'.format(self.name))
 
     def stop(self):
-        if self.stop.__code__ is not \
-                application_deployer.stop.__code__:
+        # noinspection PyUnresolvedReferences
+        if (self.stop.__code__ is not
+                application_deployer.stop.__code__):
             logger.info('Task stop {0}'.format(self.name))
 
     def create(self):
-        if self.create.__code__ is not \
-                application_deployer.create.__code__:
+        # noinspection PyUnresolvedReferences
+        if (self.create.__code__ is not
+                application_deployer.create.__code__):
             logger.info('Task create {0}'.format(self.name))
 
     def remove(self):
-        if self.remove.__code__ is not \
-                application_deployer.remove.__code__:
+        # noinspection PyUnresolvedReferences
+        if (self.remove.__code__ is not
+                application_deployer.remove.__code__):
             logger.info('Task remove {0}'.format(self.name))
 
     def restart(self):
-        if self.restart.__code__ is not \
-                application_deployer.restart.__code__:
+        # noinspection PyUnresolvedReferences
+        if (self.restart.__code__ is not
+                application_deployer.restart.__code__):
             logger.info('Task restart {0}'.format(self.name))

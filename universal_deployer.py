@@ -19,6 +19,9 @@ from plugins.curator import curator
 from plugins.databases import databases
 from plugins.executable import executable
 
+__all__ = [nssm_service, sc_service, iis_website, curator, databases,
+           executable, ]
+
 
 class Deployer:
     def __init__(self, config_file, config_path, install_path):
@@ -184,22 +187,23 @@ if __name__ == "__main__":
                         action='store_true', default=False)
     parser.add_argument('--backup-path',
                         help='path where store backup of old deployment',
-                        type=str, default='{0}/opt/universal-deployer-backups'.format(
+                        type=str,
+                        default='{0}/opt/universal-deployer-backups'.format(
                             'C:' if _is_windows else ''))
 
     parser.add_argument('--config-file',
-                        help='Contains apps to install with its version \
-                        number and parameters',
+                        help=('Contains apps to install with its version '
+                              'number and parameters'),
                         type=str)
     parser.add_argument('--config-path',
-                        help='Folder that contains the configuration of \
-                        apps to installe. Default /etc/universal-deployer',
+                        help=('Folder that contains the configuration of apps'
+                              ' to install. Default /etc/universal-deployer'),
                         type=str,
                         default='{0}/etc/universal-deployer'.format(
                             'C:' if _is_windows else ''))
     parser.add_argument('--install-path',
-                        help='Folder where will be installed all apps. \
-                        Default /opt/universal-deployer',
+                        help=('Folder where will be installed all apps. '
+                              'Default /opt/universal-deployer'),
                         type=str, default='{0}/opt/universal-deployer'.format(
                             'C:' if _is_windows else ''))
 

@@ -13,9 +13,9 @@ def install(package_name, version, source=None, download_only=False):
                 version=package_name))
         return
 
-    cmd = 'choco install {package_name} -version {version} \
-        -force --allow-downgrade'.format(
-            package_name=package_name, version=version)
+    cmd = ('choco install {package_name} -version {version}'
+           '-force --allow-downgrade').format(
+        package_name=package_name, version=version)
     if source is not None:
         cmd += ' --source {source}'.format(source=source)
     if download_only:

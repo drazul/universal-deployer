@@ -16,11 +16,11 @@ def stop(name):
 
 
 def configure_webconfig(name, key, value):
-    cmd = '{appcmd} set config {name} /section:appSettings \
-        /-"[key={key}]"'.format(appcmd=appcmd, name=name, key=key)
+    cmd = ('{appcmd} set config {name} /section:appSettings'
+           '/-"[key={key}]"').format(appcmd=appcmd, name=name, key=key)
     execute(cmd)
 
-    cmd = '''{appcmd} set config {name} /section:appSettings \
+    cmd = '''{appcmd} set config {name} /section:appSettings
         /+"[key={key},value='{value}']"'''.format(
             appcmd=appcmd, name=name, key=key, value=value)
     execute(cmd)

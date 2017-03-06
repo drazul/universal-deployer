@@ -6,7 +6,6 @@ from logger import logger
 
 def execute(command, ignore_errors=True):
     logger.debug('Executing: {0}'.format(command))
-    return
 
     proc = subprocess.Popen(
         command,

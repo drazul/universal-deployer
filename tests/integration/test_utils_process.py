@@ -1,10 +1,13 @@
 import unittest
+import os
+import sys
+
+cwd = os.getcwd()
+sys.path.insert(0, cwd)
 
 from plugins.utils.process import execute
 
 
 class TestExecute(unittest.TestCase):
     def test_foo(self):
-        assert None == execute(None)        
-
-
+        assert 0 is execute('')
