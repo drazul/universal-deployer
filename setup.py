@@ -68,7 +68,7 @@ setup(
     author='Daniel',
     author_email='',
     url='https://github.com/drazul/universal-deployer',
-    #license='MIT',
+    # license='MIT',
     packages=find_packages(exclude=['tests']),
     include_package_data=True,
     zip_safe=False,
