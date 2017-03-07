@@ -132,8 +132,7 @@ class Deployer:
             self._str2method(app, command)()
 
 
-if __name__ == "__main__":
-
+def main():
     _is_windows = platform.system() is 'Windows'
 
     parser = argparse.ArgumentParser(description='Universal deployer')
@@ -249,3 +248,7 @@ if __name__ == "__main__":
 
     logger.info('{project_name} finished successfully!'.format(
         project_name='universal_deployer'))
+
+
+if __name__ == "__main__":
+    main()

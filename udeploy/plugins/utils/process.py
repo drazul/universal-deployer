@@ -1,7 +1,7 @@
 import subprocess
 import sys
 
-from logger import logger
+from udeploy.logger import logger
 
 
 def execute(command, ignore_errors=True):
