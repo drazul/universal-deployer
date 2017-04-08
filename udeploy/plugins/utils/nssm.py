@@ -10,13 +10,13 @@ def create(service_name, executable_path, arguments=None):
     cmd = 'nssm install {service_name} {executable_path} {arguments}'.format(
         service_name=service_name, executable_path=executable_path,
         arguments=arguments if arguments else '')
-    execute(cmd)
+    execute(cmd, ignore_errors=True)
 
 
 def remove(service_name):
     cmd = 'nssm remove {service_name} confirm'.format(
             service_name=service_name)
-    execute(cmd)
+    execute(cmd, ignore_errors=True)
 
 
 def start(service_name):
@@ -47,7 +47,7 @@ def start(service_name):
 
 def stop(service_name):
     cmd = 'nssm stop {service_name}'.format(service_name=service_name)
-    execute(cmd)
+    execute(cmd, ignore_errors=True)
 
 
 def status(service_name):

@@ -4,7 +4,7 @@ import sys
 from logger import logger
 
 
-def execute(command, ignore_errors=True):
+def execute(command, ignore_errors=False):
     logger.debug('Executing: {0}'.format(command))
 
     proc = subprocess.Popen(
@@ -32,14 +32,14 @@ def execute(command, ignore_errors=True):
                 '\x00', '').replace('\r', '').replace('\n', ''))
             logger.error(stderr[-1])
 
-    if ignore_errors:
-        result = dict(
-            return_code=proc.returncode,
-            stdout=stdout,
-            stderr=stderr,
-        )
-        logger.debug(result)
-        return result
+    result = dict(
+        return_code=proc.returncode,
+        stdout=stdout,
+        stderr=stderr,
+    )
+    logger.debug(result)
 
-    if proc.returncode != 0:
+    if not ignore_errors and result['return_code'] != 0:
         sys.exit(proc.returncode)
+
+    return result

@@ -28,19 +28,20 @@ class iis_website(application_deployer):
             '{0}/{1}'.format(self.install_path, 'Configs'),
             '*.config')
 
-        if 'webconfig' in self.params:
-            for key, value in self.params['webconfig'].items():
-                iis_site.configure_webconfig(self.name, key, value)
+        if self.params:
+            if 'webconfig' in self.params:
+                for key, value in self.params['webconfig'].items():
+                    iis_site.configure_webconfig(self.name, key, value)
 
-        if 'replace' in self.params:
-            files = self._find_files(
-                self.install_path,
-                self.params['replace']['file_pattern'])
+            if 'replace' in self.params:
+                files = self._find_files(
+                    self.install_path,
+                    self.params['replace']['file_pattern'])
 
-            for filename in files:
-                self._replacement_list_on_file(
-                    filename,
-                    self.params['replace']['patterns'])
+                for filename in files:
+                    self._replacement_list_on_file(
+                        filename,
+                        self.params['replace']['patterns'])
 
     def deploy(self):
         super(iis_website, self).deploy()
@@ -48,7 +49,7 @@ class iis_website(application_deployer):
 
         self.download()
         self._sync_folders(
-            '{0}/{1}'.format(chocolatey.download_path, self.pkg_name),
+            '{0}/{1}/content'.format(chocolatey.download_path, self.pkg_name),
             self.install_path)
         self.configure()
 
