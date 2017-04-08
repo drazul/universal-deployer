@@ -22,7 +22,8 @@ def remove(service_name):
 def start(service_name):
     return_code = 1
     tries = 0
-    while return_code is not 0 and tries < 6:
+    running = False
+    while not running and tries < 6:
         time_to_sleep = tries * tries
         logger.info('Starting {service_name} in {time} seconds'.format(
             service_name=service_name, time=time_to_sleep
@@ -32,8 +33,9 @@ def start(service_name):
         cmd = 'nssm start {service_name}'.format(service_name=service_name)
         response = execute(cmd, ignore_errors=True)
         tries += 1
+        running = status(service_name)['stdout'][0].strip() == 'SERVICE_RUNNING'
 
-    if response['return_code'] is not 0:
+    if not running and response['return_code'] is not 0:
         logger.error(
             '{service_name} failed to start!'.format(
                 service_name=service_name))
@@ -50,7 +52,7 @@ def stop(service_name):
 
 def status(service_name):
     cmd = 'nssm status {service_name}'.format(service_name=service_name)
-    execute(cmd, ignore_errors=True)
+    return execute(cmd, ignore_errors=True)
 
 
 def set_delay_after_restart(service_name, delay):
