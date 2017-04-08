@@ -1,16 +1,21 @@
+import platform
 import subprocess
 import sys
 
 from logger import logger
 
 
-def execute(command, ignore_errors=False):
-    logger.debug('Executing: {0}'.format(command))
+def execute(command, working_directory=None, ignore_errors=False):
+    working_dir = (working_directory if not None
+                   else 'C:' if platform.system() is 'Windows'
+                   else '~')
 
+    logger.debug('Executing: {0} from {1}'.format(command, working_dir))
     proc = subprocess.Popen(
         command,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
+        cwd=working_dir,
         shell=True)
 
     stdout = list()

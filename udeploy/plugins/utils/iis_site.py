@@ -15,18 +15,18 @@ def stop(name):
     execute(cmd)
 
 
-def configure_webconfig(name, key, value):
-    cmd = ('{appcmd} set config {name} /section:appSettings'
-           '/-"[key={key}]"').format(appcmd=appcmd, name=name, key=key)
-    execute(cmd)
+def configure_webconfig(working_dir, name, key, value):
+    cmd = ('''{appcmd} set config {name} /section:appSettings '''
+           '''/-"[key='{key}']"''').format(appcmd=appcmd, name=name, key=key)
+    execute(cmd, working_directory=working_dir, ignore_errors=True)
 
-    cmd = '''{appcmd} set config {name} /section:appSettings
-        /+"[key={key},value='{value}']"'''.format(
+    cmd = ('''{appcmd} set config {name} /section:appSettings '''
+           '''/+"[key='{key}',value='{value}']"''').format(
             appcmd=appcmd, name=name, key=key, value=value)
-    execute(cmd)
+    execute(cmd, working_directory=working_dir)
 
 
-def configure(name, start_mode, idle_timeout, ping_response_time,
+def configure(working_dir, name, start_mode, idle_timeout, ping_response_time,
               rapid_fail_protection, recycling_preriodic, recycling_schedule):
     cmd = '''{appcmd} set apppool
     /apppool.name: {name}
@@ -42,4 +42,4 @@ def configure(name, start_mode, idle_timeout, ping_response_time,
         rapid_fail_protection=rapid_fail_protection,
         recycling_preriodic=recycling_preriodic,
         recycling_schedule=recycling_schedule)
-    execute(cmd)
+    execute(cmd, working_directory=working_dir)

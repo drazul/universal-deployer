@@ -21,17 +21,18 @@ class iis_website(application_deployer):
         super(iis_website, self).configure()
         self._copy_folder_templates(
             self.generic_config_path,
-            '{0}/{1}'.format(self.install_path, 'Configs'),
+            '{0}/bin/{1}'.format(self.install_path, 'Configs'),
             '*.config')
         self._copy_folder_templates(
             self.specific_config_path,
-            '{0}/{1}'.format(self.install_path, 'Configs'),
+            '{0}/bin/{1}'.format(self.install_path, 'Configs'),
             '*.config')
 
         if self.params:
             if 'webconfig' in self.params:
                 for key, value in self.params['webconfig'].items():
-                    iis_site.configure_webconfig(self.name, key, value)
+                    iis_site.configure_webconfig(
+                        self.install_path, self.name, key, value)
 
             if 'replace' in self.params:
                 files = self._find_files(
