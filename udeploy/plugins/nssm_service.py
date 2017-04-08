@@ -25,7 +25,7 @@ class nssm_service(application_deployer):
         self._copy_folder_templates(
             self.specific_config_path,
             '{0}/{1}'.format(self.install_path, 'Configs'),
-            '*.config')
+            '*')
 
         nssm.set_delay_after_restart(self.name, 6000)  # 6 seconds
         nssm.set_stdout_log_file(
@@ -67,7 +67,7 @@ class nssm_service(application_deployer):
             self.name,
             '%s/%s' % (self.install_path, self.params['executable']),
             self.params['arguments']
-            if 'arguments' in self.params else None)
+            if 'arguments' in self.params else '')
 
     def remove(self):
         super(nssm_service, self).remove()

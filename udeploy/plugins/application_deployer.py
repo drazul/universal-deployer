@@ -79,7 +79,11 @@ class application_deployer(object):
 
         os.makedirs(dst, exist_ok=True)
 
-        variables = {'app_name': self.name}
+        variables = {
+            'app_name': self.name,
+            'app_version': self.version,
+            'environment': self.global_config['environmentname'],
+        }
 
         files = glob.glob('{0}/{1}'.format(src, pattern))
 
