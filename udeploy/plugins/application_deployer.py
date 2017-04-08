@@ -38,6 +38,12 @@ class application_deployer(object):
         logger.info(self)
 
     @staticmethod
+    def _get_file_lines_as_list(filename):
+        with open(filename) as f:
+            content = f.readlines()
+        return [x.strip() for x in content]
+
+    @staticmethod
     def _sync_folders(src, dst):
         logger.debug('Moving data from {0} to {1}'.format(
             src, dst))

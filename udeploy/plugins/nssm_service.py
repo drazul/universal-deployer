@@ -25,6 +25,25 @@ class nssm_service(application_deployer):
             '{0}/{1}'.format(self.install_path, 'Configs'),
             '*.config')
 
+        nssm.set_delay_after_restart(self.name, 6000)  # 6 seconds
+        nssm.set_stdout_log_file(
+            self.name,
+            'C:/var/log/{service_name}.stdout.log'.format(
+                service_name=self.name))
+        nssm.set_stderr_log_file(
+            self.name,
+            'C:/var/log/{service_name}.stderr.log'.format(
+                service_name=self.name))
+        nssm.set_log_rotation(self.name, 3145728, 86400)  # 3MB, 1 day
+
+        if 'environment_file' in self.params:
+            nssm.set_custom_environment_variables(
+                self.name,
+                self._get_file_lines_as_list('{0}/{1}'.format(
+                    self.specific_config_path,
+                    self.name + '.env'
+                )))
+
     def deploy(self):
         super(nssm_service, self).deploy()
         self.stop()
