@@ -125,6 +125,7 @@ apps:
       params:
         executable: service.exe
         arguments: '--debug'
+        envirionment_file: example.env
 ```
 
 ### curator

@@ -15,7 +15,9 @@ class curator(application_deployer):
     def download(self):
         super(curator, self).download()
         chocolatey.install(self.pkg_name, self.version,
-                           source=self.global_config['choco_source'],
+                           source=self.global_config['choco_source']
+                           if 'choco_source' in self.global_config
+                           else None,
                            download_only=True)
 
     def deploy(self):

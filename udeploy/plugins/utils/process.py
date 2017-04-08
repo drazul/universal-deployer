@@ -1,7 +1,7 @@
 import subprocess
 import sys
 
-from udeploy.logger import logger
+from logger import logger
 
 
 def execute(command, ignore_errors=True):
@@ -12,21 +12,30 @@ def execute(command, ignore_errors=True):
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         shell=True)
+
+    stdout = list()
+    stderr = list()
     while proc.poll() is None:
         while True:
             line = proc.stdout.readline()
             if not line:
                 break
-            logger.info(line)
+            stdout.append(line.decode('utf-8'))
+            logger.info(stdout[-1])
 
         while True:
             line = proc.stderr.readline()
             if not line:
                 break
-            logger.error(line)
+            stderr.append(line.decode('utf-8'))
+            logger.error(stderr[-1])
 
     if ignore_errors:
-        return proc.returncode
+        return dict(
+            return_code=proc.returncode,
+            stdout=stdout,
+            stderr=stderr,
+        )
 
     if proc.returncode != 0:
         sys.exit(proc.returncode)

@@ -1,5 +1,6 @@
 from logger import logger
 
+import ntpath
 import os
 import shutil
 
@@ -21,14 +22,26 @@ def sync(src, dst):
     _delete_empty_folders(dst)
 
 
+def _normalize_path_list(path_list):
+
+    normalized_paths = list()
+
+    for path in path_list:
+        tmp = path.replace('\\', '/')
+        if tmp[0] is '/':
+            tmp = tmp[1:]
+        normalized_paths.append(tmp)
+    return normalized_paths
+
+
 def _get_file_list(folder):
     file_list = [
         os.path.join(dirpath.replace(folder, ''), f)
         for dirpath, dirnames, filenames in os.walk(folder)
         for f in filenames
     ]
-
-    return file_list
+    logger.debug('File list on %s: %s' % (folder, file_list))
+    return _normalize_path_list(file_list)
 
 
 def _categorize_files(src, dst):
@@ -71,8 +84,8 @@ def _copy_file_list(src, dst, file_list):
         src_abs_path = os.path.join(src, f)
         dst_abs_path = os.path.join(dst, f)
 
-        os.makedirs(src_abs_path, exist_ok=True)
-        os.makedirs(dst_abs_path, exist_ok=True)
+        os.makedirs(ntpath.dirname(src_abs_path), exist_ok=True)
+        os.makedirs(ntpath.dirname(dst_abs_path), exist_ok=True)
 
         shutil.copy2(src_abs_path, dst_abs_path)
 

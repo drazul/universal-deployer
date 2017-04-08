@@ -9,7 +9,7 @@ from logger import logger
 def create(service_name, executable_path, arguments=None):
     cmd = 'nssm install {service_name} {executable_path} {arguments}'.format(
         service_name=service_name, executable_path=executable_path,
-        arguments=arguments)
+        arguments=arguments if arguments else '')
     execute(cmd)
 
 
@@ -30,14 +30,14 @@ def start(service_name):
         time.sleep(time_to_sleep)
 
         cmd = 'nssm start {service_name}'.format(service_name=service_name)
-        return_code = execute(cmd, ignore_errors=True)
+        response = execute(cmd, ignore_errors=True)
         tries += 1
 
-    if return_code is not 0:
+    if response['return_code'] is not 0:
         logger.error(
             '{service_name} failed to start!'.format(
                 service_name=service_name))
-        sys.exit(return_code)
+        sys.exit(response['return_code'])
     else:
         logger.info('{service_name} started!'.format(
                 service_name=service_name))

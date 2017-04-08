@@ -1,4 +1,5 @@
 import fnmatch
+import codecs
 import glob
 import os
 
@@ -84,11 +85,13 @@ class application_deployer(object):
 
         for f in files:
             path, filename = os.path.split(f)
+            dst_file = '%s/%s' % (dst, filename)
+            logger.debug('Rendering %s template into %s'
+                         % (f, dst_file))
             content = jinja2.Environment(
                 loader=jinja2.FileSystemLoader(path or './')
             ).get_template(filename).render(variables)
-
-            with open(dst, 'w') as f_dst:
+            with codecs.open(dst_file, 'w', 'utf-8-sig') as f_dst:
                 f_dst.write(content)
 
     def get_installed_version(self):

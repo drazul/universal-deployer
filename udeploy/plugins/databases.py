@@ -5,23 +5,6 @@ from .utils import liquibase
 
 class databases(application_deployer):
 
-    def _search_properties_file(self):
-        generic_config_file = self._find_files(
-            self.generic_config_path, 'liquibase.properties')
-        specific_config_file = self._find_files(
-            self.specific_config_path, 'liquibase.properties')
-
-        if len(specific_config_file) > 0:
-            return specific_config_file[0]
-        else:
-            if len(generic_config_file) > 0:
-                return generic_config_file[0]
-            else:
-                raise FileNotFoundError(
-                    '{path}/liquibase.properties not found!'.format(
-                        path=self.generic_config_path
-                    ))
-
     def get_installed_version(self):
         super(databases, self).get_installed_version()
         chocolatey.get_installed_version(self.pkg_name)
@@ -29,7 +12,9 @@ class databases(application_deployer):
     def download(self):
         super(databases, self).download()
         chocolatey.install(self.pkg_name, self.version,
-                           source=self.global_config['choco_source'],
+                           source=self.global_config['choco_source']
+                           if 'choco_source' in self.global_config
+                           else None,
                            download_only=True)
 
     def _execute_update(self, changelog_file_path, properties_file):
@@ -61,3 +46,20 @@ class databases(application_deployer):
 
         self._execute_update(self.install_path + '/changelog-latest-post.xml',
                              properties_file)
+
+    def _search_properties_file(self):
+        generic_config_file = self._find_files(
+            self.generic_config_path, 'liquibase.properties')
+        specific_config_file = self._find_files(
+            self.specific_config_path, 'liquibase.properties')
+
+        if len(specific_config_file) > 0:
+            return specific_config_file[0]
+        else:
+            if len(generic_config_file) > 0:
+                return generic_config_file[0]
+            else:
+                raise FileNotFoundError(
+                    '{path}/liquibase.properties not found!'.format(
+                        path=self.generic_config_path
+                    ))

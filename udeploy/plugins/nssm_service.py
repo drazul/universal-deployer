@@ -11,7 +11,9 @@ class nssm_service(application_deployer):
     def download(self):
         super(nssm_service, self).download()
         chocolatey.install(self.pkg_name, self.version,
-                           source=self.global_config['choco_source'],
+                           source=self.global_config['choco_source']
+                           if 'choco_source' in self.global_config
+                           else None,
                            download_only=True)
 
     def configure(self):
@@ -51,7 +53,7 @@ class nssm_service(application_deployer):
 
         self.download()
         self._sync_folders(
-            '{0}/{1}'.format(chocolatey.download_path, self.pkg_name),
+            '{0}/{1}/content'.format(chocolatey.download_path, self.pkg_name),
             self.install_path)
 
         self.create()
@@ -63,8 +65,9 @@ class nssm_service(application_deployer):
         super(nssm_service, self).create()
         nssm.create(
             self.name,
-            self.params['executable'],
-            self.params['arguments'])
+            '%s/%s' % (self.install_path, self.params['executable']),
+            self.params['arguments']
+            if 'arguments' in self.params else None)
 
     def remove(self):
         super(nssm_service, self).remove()

@@ -10,10 +10,10 @@ def install(package_name, version, source=None, download_only=False):
         logger.info(
             '{package_name} {version} currently installed. Skipping'.format(
                 package_name=package_name,
-                version=package_name))
+                version=version))
         return
 
-    cmd = ('choco install {package_name} -version {version}'
+    cmd = ('choco install {package_name} -version {version} '
            '-force --allow-downgrade').format(
         package_name=package_name, version=version)
     if source is not None:
@@ -27,11 +27,14 @@ def install(package_name, version, source=None, download_only=False):
 def get_installed_version(package_name):
     cmd = 'choco search --local-only {package_name}'.format(
         package_name=package_name)
-    execute(cmd)
+    return execute(cmd)
 
 
 def _is_installed(package_name, version):
-    if get_installed_version(package_name) == version:
-        return True
-    else:
-        return False
+    result = get_installed_version(package_name)
+    if result['return_code'] == 0:
+        installed_version = result['stdout'][0].split(' ')[1].strip()
+        if installed_version == version:
+            return True
+
+    return False

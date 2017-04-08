@@ -12,7 +12,9 @@ class executable(application_deployer):
     def download(self):
         super(executable, self).download()
         chocolatey.install(self.pkg_name, self.version,
-                           source=self.global_config['choco_source'],
+                           source=self.global_config['choco_source']
+                           if 'choco_source' in self.global_config
+                           else None,
                            download_only=True)
 
     def deploy_post(self):
