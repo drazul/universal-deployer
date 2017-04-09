@@ -63,14 +63,15 @@ class application_deployer(object):
                 outfile.write(line)
 
     @staticmethod
-    def _find_files(root_path, pattern):
-        file_list = []
+    def _find_files(root_path, file_pattern):
         if not os.path.isdir(root_path):
-            return file_list
+            return list()
+        absolute_file_pattern = ('%s/%s' % (
+            root_path, file_pattern)).replace('//', '/')
 
-        for file in os.listdir(root_path):
-            if fnmatch.fnmatch(file, pattern):
-                file_list.append(file)
+        file_list = glob.glob(absolute_file_pattern)
+        logger.info('Config files found %s' % file_list)
+
         return file_list
 
     def _copy_folder_templates(self, src, dst, pattern):
