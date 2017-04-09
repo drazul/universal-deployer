@@ -34,7 +34,8 @@ def start(service_name):
         cmd = 'nssm start {service_name}'.format(service_name=service_name)
         response = execute(cmd, ignore_errors=True)
         tries += 1
-        running = status(service_name)['stdout'][0].strip() == 'SERVICE_RUNNING'
+        running = (
+            status(service_name)['stdout'][0].strip() == 'SERVICE_RUNNING')
 
     if not running and response['return_code'] is not 0:
         logger.error(
