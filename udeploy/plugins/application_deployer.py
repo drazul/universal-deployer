@@ -1,4 +1,3 @@
-import fnmatch
 import codecs
 import glob
 import os

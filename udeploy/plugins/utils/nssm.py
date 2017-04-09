@@ -20,9 +20,10 @@ def remove(service_name):
 
 
 def start(service_name):
-    return_code = 1
     tries = 0
     running = False
+    response = dict()
+
     while not running and tries < 6:
         time_to_sleep = tries * tries
         logger.info('Starting {service_name} in {time} seconds'.format(

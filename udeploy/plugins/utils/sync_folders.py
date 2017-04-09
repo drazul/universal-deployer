@@ -14,8 +14,8 @@ def sync(src, dst):
     logger.debug('Deleted files: %s' % categorization['missing_files'])
     logger.debug('Unchanged files: %s' % categorization['without_changes'])
 
-    files_to_be_copied = categorization['new_files'] + \
-                         categorization['to_be_updated']
+    files_to_be_copied = (categorization['new_files'] +
+                          categorization['to_be_updated'])
     logger.debug('Files to be copied: %s' % files_to_be_copied)
     logger.debug('Files to be deleted: %s' % categorization['missing_files'])
 
