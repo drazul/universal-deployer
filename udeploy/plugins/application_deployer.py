@@ -83,6 +83,9 @@ class application_deployer(object):
             'app_name': self.name,
             'app_version': self.version,
             'environment': self.global_config['environmentname'],
+            'log_levels':
+                self.global_config['log_level']
+                if 'log_level' in self.global_config else '',
         }
 
         files = glob.glob('{0}/{1}'.format(src, pattern))
@@ -95,7 +98,7 @@ class application_deployer(object):
             content = jinja2.Environment(
                 loader=jinja2.FileSystemLoader(path or './')
             ).get_template(filename).render(variables)
-            with codecs.open(dst_file, 'w', 'utf-8-sig') as f_dst:
+            with codecs.open(dst_file, 'w', 'utf-8') as f_dst:
                 f_dst.write(content)
 
     def get_installed_version(self):
