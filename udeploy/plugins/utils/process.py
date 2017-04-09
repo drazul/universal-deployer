@@ -2,7 +2,7 @@ import platform
 import subprocess
 import sys
 
-from logger import logger
+from udeploy.logger import logger
 
 
 def execute(command, working_directory=None, ignore_errors=False):
@@ -44,7 +44,7 @@ def execute(command, working_directory=None, ignore_errors=False):
     )
     logger.debug(result)
 
-    if not ignore_errors and result['return_code'] != 0:
+    if ignore_errors is False and result['return_code'] != 0:
         sys.exit(proc.returncode)
 
     return result
