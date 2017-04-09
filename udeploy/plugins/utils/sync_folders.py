@@ -1,4 +1,4 @@
-from logger import logger
+from logger import logger, TRACE
 
 import ntpath
 import os
@@ -90,13 +90,13 @@ def _copy_file_list(src, dst, file_list):
         os.makedirs(ntpath.dirname(src_abs_path), exist_ok=True)
         os.makedirs(ntpath.dirname(dst_abs_path), exist_ok=True)
 
-        logger.debug('Copying %s to %s' % (src_abs_path, dst_abs_path))
+        logger.log(TRACE, 'Copying %s to %s' % (src_abs_path, dst_abs_path))
         shutil.copy2(src_abs_path, dst_abs_path)
 
 
 def _delete_file_list(parent_path, file_list):
     for f in file_list:
-        logger.debug('Deleting %s' % f)
+        logger.log(TRACE, 'Deleting %s' % f)
         os.remove(os.path.join(parent_path, f))
 
 

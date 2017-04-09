@@ -1,13 +1,17 @@
 import logging
 
+TRACE = 5
+logging.addLevelName(TRACE, "TRACE")
 logger = logging.getLogger('universal_deployer')
 
 
-def config_logger(log_file, debug, quiet):
+def config_logger(log_file, debug, trace, quiet):
     if quiet:
         level = logging.FATAL
     else:
-        if debug:
+        if trace:
+            level = TRACE
+        elif debug:
             level = logging.DEBUG
         else:
             level = logging.INFO

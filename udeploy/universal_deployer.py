@@ -142,6 +142,9 @@ def main():
     parser.add_argument('--debug',
                         help='Debug log', action='store_true',
                         default=False)
+    parser.add_argument('--trace',
+                        help='Trace log', action='store_true',
+                        default=False)
     parser.add_argument('--quiet',
                         help='Silent log', action='store_true',
                         default=False)
@@ -212,7 +215,7 @@ def main():
         print('You need specify a valid config file.')
         sys.exit(-1)
 
-    config_logger(args.log_file, args.debug, args.quiet)
+    config_logger(args.log_file, args.debug, args.trace, args.quiet)
 
     logger.info('Starting {project_name}'.format(
         project_name='universal_deployer'))
