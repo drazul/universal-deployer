@@ -35,7 +35,7 @@ class sc_service(application_deployer):
 
         self.download()
         self._sync_folders(
-            '{0}/{1}'.format(chocolatey.download_path, self.pkg_name),
+            '{0}/{1}/content'.format(chocolatey.download_path, self.pkg_name),
             self.install_path)
 
         self.create()
@@ -55,7 +55,8 @@ class sc_service(application_deployer):
         super(sc_service, self).create()
         sc.create(
             self.name,
-            self.params['executable'])
+            '%s/%s' %
+            (self.install_path, self.params['executable']))
 
     def remove(self):
         super(sc_service, self).remove()
